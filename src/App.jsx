@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import Game from './Game'
 
 function App() {
 
@@ -7,7 +8,7 @@ function App() {
     <main>
       <h1>Memory game</h1> 
       <label>My name</label>
-      <input />
+      <Game />
       
     </main>
   )
