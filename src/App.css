@@ -19,6 +19,14 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+
+/* .memoryGame {
+  width: 100vw;
+  display: grid;
+  grid-template-columns:2rem, 2rem, 2rem; /*repeat(autofit, minmax(5rem, 1fr));
+}
+*/
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);

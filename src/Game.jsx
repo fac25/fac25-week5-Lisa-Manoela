@@ -1,6 +1,36 @@
+const levels = {
+  "level1": 8,
+  "level2": 10,
+  "level3": 12,
+  "level4": 15,
+  "level5": 18
+}
 
-function Game() {
-    const uniqueCards = [0, 1, 2, 3, 4]
+function arrayOfAscendingNums (n) {
+  let newArray = [];
+
+  for (let i = 0; i < n; i++) {
+    newArray.push(i)
+  }
+
+  return newArray;
+}
+
+
+function Game({level}) {
+ 
+ /*
+  4X4
+  4X5
+  4x6
+  5x6
+  6x6
+*/
+
+    const numOfCardsForCurrentLevel =  levels["level" + level]
+    console.log(numOfCardsForCurrentLevel)
+
+    const uniqueCards = arrayOfAscendingNums(numOfCardsForCurrentLevel)
     const gameBoard = uniqueCards.concat(uniqueCards)
 
     // Randomise
@@ -9,10 +39,10 @@ function Game() {
     // [ 2, 0, 3, 1, 0, 4, 4, 1, 3, 2 ]
 
   return (
-    <div className="memoryGame">
-        <ul>
+    <div>
+        <ul className="memoryGame">
             {randomisedBoard.map((tile) => (<li className="tile" id={"tile"+tile} ><h2>{tile}</h2></li>))}
-            </ul>
+        </ul>
     </div>
   )
 }
