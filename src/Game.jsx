@@ -13,7 +13,14 @@ const levels = {
   4x6
   5x6
   6x6
-*/
+*/ 
+const levelBoards = {
+  1 : createArray(1),
+  2 : createArray(2),
+  3 : createArray(3),
+  4 : createArray(4),
+  5 : createArray(5)
+  }
 // CREATE BOARD
 
 function createArray (level) {
@@ -30,15 +37,7 @@ function createArray (level) {
     const randomisedBoard = gameBoard.sort( () => .5 - Math.random() )
     return randomisedBoard
   }
-  const levelBoards = {
-  1 : createArray(1),
-  2 : createArray(2),
-  3 : createArray(3),
-  4 : createArray(4),
-  5 : createArray(5)
-  }
-  
-  
+ 
 // COMPONENT
 function Game({level}) {
   const [points, setPoints] = useState(0)
