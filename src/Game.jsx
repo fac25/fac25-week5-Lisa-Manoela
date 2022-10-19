@@ -60,18 +60,32 @@ function Game({level}) {
     let score = 0
     
     function compareTiles(e) {
-  
+
+    if (e.target.id == "") {
+      return
+    } 
+    
+    if (clickedIds[0]==e.target.id) {
+      return
+    }
+
     clicked.push(e.target.innerText);
-    clickedIds.push(e.target.id)
-  
-    if (clicked.length === 2 && clickedIds[0] !== clickedIds[1]) {
+    clickedIds.push(e.target.id);
+    console.log(clickedIds)
+    
+    if (clicked.length === 2) {
       guesses++
   
       match = clicked[0] === clicked[1]? true: false;
       clicked = []
       
       // If it's a match, hide the cards
-      match && clickedIds.forEach((id) => {document.getElementById(id).style.display = "none"; setPoints(points + 1)})
+      match && clickedIds.forEach((id) => {
+        document.getElementById(id).classList.add("guessed");
+        document.getElementById(id).setAttribute("id", "")
+        setPoints(points + 1);
+        
+      })
       clickedIds = []
     } 
     return match
