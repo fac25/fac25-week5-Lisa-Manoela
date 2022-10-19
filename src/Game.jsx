@@ -46,7 +46,7 @@ function Game({level}) {
 
       const board = levelBoards[level].map(
         (tile, index) => {
-      return (<li className="tile" onClick={compareTiles} key={index} id={"tile"+index} >{tile}</li>)
+      return (<p className="tile" onClick={compareTiles} key={index} id={"tile"+index} >{tile}</p>)
     });
       return board 
     }
@@ -98,9 +98,9 @@ function Info({points}) {
   return (
     <div>
       <Info points={points}/>
-        <ul className="memoryGame">
+        <div className="memoryGame">
           {board}
-        </ul>
+        </div>
     </div>
   )
 }
