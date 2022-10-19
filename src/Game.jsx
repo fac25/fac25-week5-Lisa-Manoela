@@ -30,7 +30,14 @@ function createArray (level) {
     const randomisedBoard = gameBoard.sort( () => .5 - Math.random() )
     return randomisedBoard
   }
-  const randomisedBoard = createArray(1)
+  const levelBoards = {
+  1 : createArray(1),
+  2 : createArray(2),
+  3 : createArray(3),
+  4 : createArray(4),
+  5 : createArray(5)
+  }
+  
   
 // COMPONENT
 function Game({level}) {
@@ -38,8 +45,7 @@ function Game({level}) {
 
   function createBoard() {
 
-    
-      const board = randomisedBoard.map(
+      const board = levelBoards[level].map(
         (tile, index) => {
       return (<li className="tile" onClick={compareTiles} key={index} id={"tile"+index} >{tile}</li>)
     });
