@@ -27,14 +27,23 @@ function arrayOfAscendingNums (n) {
 
 function Game({level, tileValue, setTileValue}) {
  
-  useEffect(() => {
-    const memoryGame = document.querySelector(".memoryGame")
-    memoryGame.addEventListener("mouseclick", compareTiles);
-    return memoryGame.removeEventListener("mouseclick", compareTiles) 
-  }, []);
+  // useEffect(() => {
+  //   const memoryGame = document.querySelectorAll(".indTile")
+  //   memoryGame.forEach((indTile) => {indTile.addEventListener("click", console.log("test"))});
+  //   return memoryGame.forEach((indTile) => {indTile.removeEventListener("click", compareTiles) });
+  // }, []);
+  let clicked = [];
+  let match;
   
   function compareTiles(e) {
-    setTileValue([e.target.id])
+
+    console.log(e.target.innerText)
+    clicked.push(e.target.innerText);
+    if (clicked.length === 2) {
+      match = clicked[0] === clicked[1]? true: false;
+      clicked = []
+    }
+    
   }
     const numOfCardsForCurrentLevel =  levels["level" + level]
     // console.log(numOfCardsForCurrentLevel)
@@ -49,7 +58,7 @@ function Game({level, tileValue, setTileValue}) {
 function RandomiseBoard(){
   const board = randomisedBoard.map(
     (tile, index) => {
-  return (<li className="tile" /*onClick={compareTiles}*/ key={index} id={"tile"+tile} ><h2>{tile}</h2></li>)
+  return (<li className="tile" onClick={compareTiles} key={index} id={"tile"+tile} ><h2>{tile}</h2></li>)
 });
   return board 
 }
