@@ -1,4 +1,4 @@
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 
 const levels = {
   "level1": 8,
@@ -14,7 +14,7 @@ const levels = {
   5x6
   6x6
 */
-
+// CREATE BOARD
 function arrayOfAscendingNums (n) {
   let newArray = [];
 
@@ -24,49 +24,75 @@ function arrayOfAscendingNums (n) {
 
   return newArray;
 }
+function createBoard(level) {
+  const numOfCardsForCurrentLevel =  levels["level" + level]
+    // console.log(numOfCardsForCurrentLevel)
+  const uniqueCards = arrayOfAscendingNums(numOfCardsForCurrentLevel)
+  const gameBoard = uniqueCards.concat(uniqueCards)
+    // Randomise
+    const randomisedBoard = gameBoard.sort( () => .5 - Math.random() )
+  
+    const board = randomisedBoard.map(
+      (tile, index) => {
+    return (<li className="tile" onClick={compareTiles} key={index} id={"tile"+index} >{tile}</li>)
+  });
+    return board 
+  }
+  
+  const board = createBoard(1)
 
-function Game({level, tileValue, setTileValue}) {
- 
+  // PLAY GAME
+  let clicked = [];
+  let match;
+  let clickedIds = []
+  let points = 0
+  let guesses = 0
+  let score = 0
+  
+  function compareTiles(e) {
+
+  clicked.push(e.target.innerText);
+  clickedIds.push(e.target.id)
+
+  if (clicked.length === 2 && clickedIds[0] !== clickedIds[1]) {
+    guesses++
+
+    match = clicked[0] === clicked[1]? true: false;
+    clicked = []
+    
+    // If it's a match, hide the cards
+    match && clickedIds.forEach((id) => {document.getElementById(id).style.display = "none"}) && points++
+    clickedIds = []
+  } 
+}
+
+// COMPONENT
+function Game({level}) {
+  // const [points, setPoints] = useState(0)
+  
   // useEffect(() => {
   //   const memoryGame = document.querySelectorAll(".indTile")
   //   memoryGame.forEach((indTile) => {indTile.addEventListener("click", console.log("test"))});
   //   return memoryGame.forEach((indTile) => {indTile.removeEventListener("click", compareTiles) });
   // }, []);
-  let clicked = [];
-  let match;
-  
-  function compareTiles(e) {
 
-    console.log(e.target.innerText)
-    clicked.push(e.target.innerText);
-    if (clicked.length === 2) {
-      match = clicked[0] === clicked[1]? true: false;
-      clicked = []
-    }
+ 
+  useEffect(() =>{
+    const pointsEl = document.getElementById("points")
+    console.log(pointsEl)
+  }, [points])
     
-  }
-    const numOfCardsForCurrentLevel =  levels["level" + level]
-    // console.log(numOfCardsForCurrentLevel)
-
-    const uniqueCards = arrayOfAscendingNums(numOfCardsForCurrentLevel)
-    const gameBoard = uniqueCards.concat(uniqueCards)
-
-    // Randomise
-    const randomisedBoard = gameBoard.sort( () => .5 - Math.random() )
-
     // [ 2, 0, 3, 1, 0, 4, 4, 1, 3, 2 ]
-function RandomiseBoard(){
-  const board = randomisedBoard.map(
-    (tile, index) => {
-  return (<li className="tile" onClick={compareTiles} key={index} id={"tile"+tile} ><h2>{tile}</h2></li>)
-});
-  return board 
-}
 
   return (
     <div>
+      <span>
+        <p id="points">{points}</p>
+        <p>Guesses {guesses}</p>
+        <p>Score {score}</p>
+      </span>
         <ul className="memoryGame">
-          <RandomiseBoard/>
+          {board}
         </ul>
     </div>
   )
