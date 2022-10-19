@@ -8,7 +8,7 @@ function App() {
     <main>
       <h1>Memory game</h1> 
       <label>My name</label>
-      <Game />
+      <Game level="1" />
       
     </main>
   )
