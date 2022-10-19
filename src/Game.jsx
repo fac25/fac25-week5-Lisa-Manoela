@@ -16,28 +16,28 @@ const levels = {
 */
 // CREATE BOARD
 
+function createArray (level) {
+    let newArray = [];
+  
+    for (let i = 0; i < levels["level" + level]; i++) {
+      newArray.push(i)
+    }
 
-
+      // console.log(numOfCardsForCurrentLevel)
+    const uniqueCards = newArray
+    const gameBoard = uniqueCards.concat(uniqueCards)
+      // Randomise
+    const randomisedBoard = gameBoard.sort( () => .5 - Math.random() )
+    return randomisedBoard
+  }
+  const randomisedBoard = createArray(1)
+  
 // COMPONENT
 function Game({level}) {
   const [points, setPoints] = useState(0)
 
-  function arrayOfAscendingNums (n) {
-    let newArray = [];
-  
-    for (let i = 0; i < n; i++) {
-      newArray.push(i)
-    }
-  
-    return newArray;
-  }
-  function createBoard(level, newGame) {
-    const numOfCardsForCurrentLevel =  levels["level" + level]
-      // console.log(numOfCardsForCurrentLevel)
-    const uniqueCards = arrayOfAscendingNums(numOfCardsForCurrentLevel)
-    const gameBoard = uniqueCards.concat(uniqueCards)
-      // Randomise
-       const randomisedBoard = gameBoard.sort( () => .5 - Math.random() )
+  function createBoard() {
+
     
       const board = randomisedBoard.map(
         (tile, index) => {
