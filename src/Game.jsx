@@ -13,7 +13,8 @@ const levels = {
   4x6
   5x6
   6x6
-*/ 
+*/
+
 const levelBoards = {
   1 : createArray(1),
   2 : createArray(2),
@@ -73,7 +74,7 @@ function Game({level}) {
     clickedIds.push(e.target.id);
     console.log(clickedIds)
     
-    if (clicked.length === 2) {
+    if (clicked.length === 2 ) {
       guesses++
   
       match = clicked[0] === clicked[1]? true: false;
@@ -84,7 +85,6 @@ function Game({level}) {
         document.getElementById(id).classList.add("guessed");
         document.getElementById(id).setAttribute("id", "")
         setPoints(points + 1);
-        
       })
       clickedIds = []
     } 
