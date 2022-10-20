@@ -144,12 +144,12 @@ function Game({level, setLevel, usrname}) {
 function Info({points}) {
 
   return (
-    <span>
-        <p>Username: {usrname}</p>
-        <p>Points: <span id="points">{points}</span></p>
-        <p>Guesses: {guesses}</p>
-        <p>Score: {score}</p>
-        <p>Level: {level}</p>
+    <span className="userInfo">
+        <h3>Username: {usrname}</h3>
+        <h3>Points: <span id="points">{points}</span></h3>
+        <h3>Guesses: {guesses}</h3>
+        <h3>Score: {score}</h3>
+        <h3>Level: {level}</h3>
       </span>
   )
 }
