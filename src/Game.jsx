@@ -42,7 +42,7 @@ function createArray (level) {
   let matchedClassNames = [];
  
 // COMPONENT
-function Game({level, setLevel, usrname}) {
+function Game({level, setLevel, usrname, setGameOver}) {
   const [points, setPoints] = useState(0);
   const [guesses, setGuesses] = useState(0);
   const [score, setScore] = useState(0); //(points / guesses * 100)
@@ -81,6 +81,9 @@ function Game({level, setLevel, usrname}) {
 
   function checkIfShouldGoToNextLevel() {
     if(levels[`level${level}`] === (points + 1)) {
+
+      if(level === 5) {setGameOver(true)}
+
       //unhide all of the tiles, reset the points and guesses to 0 and increase the level
       setPoints(0);
       setGuesses(0);

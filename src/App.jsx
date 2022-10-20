@@ -1,12 +1,28 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import Game from './Game'
 import UserName from './UserName'
+import Win from './Win'
 
 function App() {
   const [level, setLevel] = useState(1);
   const [usrname, setName] = useState("");
+  const [gameOver, setGameOver] = useState(false);
 
+
+  useEffect(
+    () => {
+        console.log(localStorage.getItem("username"));
+        localStorage.getItem("username")? setName(localStorage.getItem("username")): "";
+    }, []
+)
+
+  useEffect(
+    () => {
+        console.log(localStorage.getItem("username"));
+        localStorage.getItem("username")? setName(localStorage.getItem("username")): "";
+    }, []
+)
 
   return (
     <main>
@@ -21,11 +37,14 @@ function App() {
           <li>Find all matching pairs to go up a level</li>
         </ul>
       </p>
-      {usrname==="" ? 
+      {usrname === ""? 
       <UserName usrname={usrname} setName={setName} />
-      :
-      <Game level={level} setLevel={setLevel} usrname={usrname} />
-  }
+      : !gameOver?
+      <Game level={level} setLevel={setLevel} usrname={usrname} setGameOver={setGameOver} />
+      :<Win setLevel={setLevel} setGameOver={setGameOver} usrname={usrname} /> /*console.log("you win")*/
+      }
+
+      {/*gameOver === true? console.log("you win"): console.log("this did not work!!!")*/}
     </main>
   )
 }
