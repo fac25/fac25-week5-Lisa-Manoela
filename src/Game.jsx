@@ -39,8 +39,10 @@ function createArray (level) {
   }
  
 // COMPONENT
-function Game({level}) {
-  const [points, setPoints] = useState(0)
+function Game({level, setLevel}) {
+  const [points, setPoints] = useState(0);
+  const [guesses, setGuesses] = useState(0);
+  const [score, setScore] = useState(0); //(points / guesses * 100)
 
   function createBoard() {
 
@@ -56,28 +58,45 @@ function Game({level}) {
     let clicked = [];
     let match;
     let clickedIds = []
-    let guesses = 0
-    let score = 0
+    // let guesses = 0
+    // let score = 0
+
+  function checkIfShouldGoToNextLevel() {
+    if(levels[`level${level}`] === (points + 1)) {
+      //unhide all of the tiles, reset the points and guesses to 0 and increase the level
+      setPoints(0);
+      setGuesses(0);
+      setLevel(level + 1); 
+      const allTiles = document.querySelectorAll(".tile");
+      allTiles.forEach( (tile) => {tile.style.display = "block";} )
+    }
+  }  
     
-    function compareTiles(e) {
+  function compareTiles(e) {
   
     clicked.push(e.target.innerText);
     clickedIds.push(e.target.id)
   
     if (clicked.length === 2 && clickedIds[0] !== clickedIds[1]) {
-      guesses++
+      setGuesses(guesses + 1)//guesses++
+      //setScore((points / guesses * 100))
   
       match = clicked[0] === clicked[1]? true: false;
       clicked = []
       
       // If it's a match, hide the cards
-      match && clickedIds.forEach((id) => {document.getElementById(id).style.display = "none"; setPoints(points + 1)})
-      clickedIds = []
+      match && clickedIds.forEach((id) => {
+        document.getElementById(id).style.display = "none"; 
+        setPoints(points + 1)
+        //setScore((points / guesses * 100))
+      })
+      clickedIds = [];
+      checkIfShouldGoToNextLevel();
     } 
     return match
   }
 
-  const board = createBoard(1)
+  const board = createBoard(level)
 
     // [ 2, 0, 3, 1, 0, 4, 4, 1, 3, 2 ]
 function Info({points}) {
@@ -85,15 +104,15 @@ function Info({points}) {
   return (
     <span>
         <p>Points: <span id="points">{points}</span></p>
-        <p>Guesses {guesses}</p>
-        <p>Score {score}</p>
+        <p>Guesses: {guesses}</p>
+        <p>Score: {score}</p>
       </span>
   )
 }
 
- useEffect(() => {
-    document.getElementById("points").innerText=points;
-  }, [points])
+//  useEffect(() => {
+//     document.getElementById("points").innerText=points;
+//   }, [points])
 
   return (
     <div>
