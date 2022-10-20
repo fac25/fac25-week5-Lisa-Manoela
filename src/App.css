@@ -23,9 +23,10 @@
 .guessed {
   background-color: rgb(68, 255, 0);
 }
-.uncklickable {
+/* .uncklickable {
   pointer-events: none;
-}
+  background-color: rgb(89, 89, 0);
+} */
 
 .memoryGame {
   width: 50vw;
