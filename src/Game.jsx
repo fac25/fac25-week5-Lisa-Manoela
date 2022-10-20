@@ -40,7 +40,7 @@ function createArray (level) {
   }
  
 // COMPONENT
-function Game({level, setLevel}) {
+function Game({level, setLevel, usrname}) {
   const [points, setPoints] = useState(0);
   const [guesses, setGuesses] = useState(0);
   const [score, setScore] = useState(0); //(points / guesses * 100)
@@ -119,6 +119,7 @@ function Info({points}) {
 
   return (
     <span>
+        <p>Username: {usrname}</p>
         <p>Points: <span id="points">{points}</span></p>
         <p>Guesses: {guesses}</p>
         <p>Score: {score}</p>
