@@ -1,8 +1,10 @@
 function Win (props) {
+
+    
     
     function playAgain() {
-        props.setLevel(1);
-        props.setGameOver(false);
+        localStorage.setItem("username", props.usrname);
+        location.reload();
     }
 
     return (
