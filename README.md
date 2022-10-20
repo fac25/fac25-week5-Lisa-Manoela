@@ -28,11 +28,11 @@ we used vite to setup the project
 this site is deployed on Netlify
 
 ## Criteria 
--[x] Accept at least 2 kinds of user input
--[x] Have some form of persistent state and interactivity
+- [x] Accept at least 2 kinds of user input
+- [x] Have some form of persistent state and interactivity
 ### Stretch criteria 
--[x] Save your state to localstorage so you can leave the page and come back later
--[] Make it look great
+- [x] Save your state to localstorage so you can leave the page and come back later
+- [] Make it look great
 
 ## User Stories
 
