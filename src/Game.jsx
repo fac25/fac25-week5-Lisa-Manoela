@@ -69,12 +69,14 @@ function Game({level, setLevel}) {
       setGuesses(0);
       setLevel(level + 1); 
       const allTiles = document.querySelectorAll(".tile");
-      allTiles.forEach( (tile) => {tile.style.display = "block";} )
+      allTiles.forEach( (tile) => {
+        tile.style.display = "block";
+        tile.classList.remove("guessed", "unclickable");
+
+      } )
       //setScore((points / guesses * 100))
     }
   }  
-    
-
     function compareTiles(e) {
 
     if (e.target.id == "") {
@@ -87,6 +89,7 @@ function Game({level, setLevel}) {
 
     clicked.push(e.target.innerText);
     clickedIds.push(e.target.id);
+    document.getElementById(e.target.id).classList.add("unclickable")
     console.log(clickedIds)
     
     if (clicked.length === 2 ) {
@@ -99,14 +102,13 @@ function Game({level, setLevel}) {
       // If it's a match, hide the cards
       match && clickedIds.forEach((id) => {
 
-        document.getElementById(id).classList.add("guessed");
-        document.getElementById(id).setAttribute("id", "")
+        document.getElementById(id).classList.add("guessed", "unclickable");
         setPoints(points + 1);
       })
       clickedIds = []
       checkIfShouldGoToNextLevel();
       
-    } 
+    }
     return match
   }
 
@@ -120,6 +122,7 @@ function Info({points}) {
         <p>Points: <span id="points">{points}</span></p>
         <p>Guesses: {guesses}</p>
         <p>Score: {score}</p>
+        <p>Level: {level}</p>
       </span>
   )
 }
