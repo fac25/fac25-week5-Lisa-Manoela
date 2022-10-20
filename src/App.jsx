@@ -17,7 +17,7 @@ function App() {
       <UserName usrname={usrname} setName={setName} />
       : !gameOver?
       <Game level={level} setLevel={setLevel} usrname={usrname} setGameOver={setGameOver} />
-      :<Win /> /*console.log("you win")*/
+      :<Win setLevel={setLevel} setGameOver={setGameOver} /> /*console.log("you win")*/
       }
 
       {/*gameOver === true? console.log("you win"): console.log("this did not work!!!")*/}

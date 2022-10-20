@@ -1,6 +1,15 @@
-function Win () {
+function Win (props) {
+    
+    function playAgain() {
+        props.setLevel(1);
+        props.setGameOver(false);
+    }
+
     return (
-        <h2>You win!!</h2>
+        <div>
+          <h2>You win!!</h2>
+          <button type="button" onClick={playAgain} >Play again</button>
+        </div>
     );
 }
 
