@@ -71,7 +71,9 @@ function Game({level, setLevel}) {
       const allTiles = document.querySelectorAll(".tile");
       allTiles.forEach( (tile) => {
         tile.style.display = "block";
-        tile.classList.remove("guessed")} )
+        tile.classList.remove("guessed", "unclickable");
+
+      } )
       //setScore((points / guesses * 100))
     }
   }  
