@@ -13,7 +13,8 @@ const levels = {
   4x6
   5x6
   6x6
-*/ 
+*/
+
 const levelBoards = {
   1 : createArray(1),
   2 : createArray(2),
@@ -48,7 +49,7 @@ function Game({level, setLevel}) {
 
       const board = levelBoards[level].map(
         (tile, index) => {
-      return (<li className="tile" onClick={compareTiles} key={index} id={"tile"+index} >{tile}</li>)
+      return (<p className="tile" onClick={compareTiles} key={index} id={"tile"+index} >{tile}</p>)
     });
       return board 
     }
@@ -69,16 +70,27 @@ function Game({level, setLevel}) {
       setLevel(level + 1); 
       const allTiles = document.querySelectorAll(".tile");
       allTiles.forEach( (tile) => {tile.style.display = "block";} )
+      //setScore((points / guesses * 100))
     }
   }  
     
-  function compareTiles(e) {
-  
+
+    function compareTiles(e) {
+
+    if (e.target.id == "") {
+      return
+    } 
+    
+    if (clickedIds[0]==e.target.id) {
+      return
+    }
+
     clicked.push(e.target.innerText);
-    clickedIds.push(e.target.id)
-  
-    if (clicked.length === 2 && clickedIds[0] !== clickedIds[1]) {
-      setGuesses(guesses + 1)//guesses++
+    clickedIds.push(e.target.id);
+    console.log(clickedIds)
+    
+    if (clicked.length === 2 ) {
+      setGuesses(guesses + 1)
       //setScore((points / guesses * 100))
   
       match = clicked[0] === clicked[1]? true: false;
@@ -86,12 +98,14 @@ function Game({level, setLevel}) {
       
       // If it's a match, hide the cards
       match && clickedIds.forEach((id) => {
-        document.getElementById(id).style.display = "none"; 
-        setPoints(points + 1)
-        //setScore((points / guesses * 100))
+
+        document.getElementById(id).classList.add("guessed");
+        document.getElementById(id).setAttribute("id", "")
+        setPoints(points + 1);
       })
-      clickedIds = [];
+      clickedIds = []
       checkIfShouldGoToNextLevel();
+      
     } 
     return match
   }
@@ -117,9 +131,9 @@ function Info({points}) {
   return (
     <div>
       <Info points={points}/>
-        <ul className="memoryGame">
+        <div className="memoryGame">
           {board}
-        </ul>
+        </div>
     </div>
   )
 }

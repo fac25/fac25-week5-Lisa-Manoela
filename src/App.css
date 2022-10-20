@@ -1,16 +1,17 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
 .tile {
-  height: 6em;
-  padding: 1.5em;
+  height: 8rem; 
+  padding: 0.5rem;
   will-change: filter;
   background-color: rgb(255, 0, 60);
   border: 2px solid black;
+  border-radius: 5px;
+  font-size: 46px;
 }
 .tile:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
@@ -19,13 +20,16 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
-
-/* .memoryGame {
-  width: 100vw;
-  display: grid;
-  grid-template-columns:2rem, 2rem, 2rem; /*repeat(autofit, minmax(5rem, 1fr));
+.guessed {
+  background-color: rgb(68, 255, 0);
 }
-*/
+
+.memoryGame {
+  width: 50vw;
+  display: grid;
+  grid-template-columns: repeat( auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+}
 
 @keyframes logo-spin {
   from {
@@ -42,9 +46,6 @@
   }
 }
 
-.card {
-  padding: 2em;
-}
 
 .read-the-docs {
   color: #888;
