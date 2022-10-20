@@ -39,7 +39,7 @@ function createArray (level) {
     return randomisedBoard
   }
 
-  let matchedIds = [];
+  let matchedClassNames = [];
  
 // COMPONENT
 function Game({level, setLevel, usrname}) {
@@ -51,7 +51,21 @@ function Game({level, setLevel, usrname}) {
 
       const board = levelBoards[level].map(
         (tile, index) => {
-      return (<p className="tile" onClick={compareTiles} key={index} id={"tile"+index} >{tile}</p>)
+      return (
+      <div className={"tile"+index + " flip-card"}>
+        <div className='flip-card-inner'>
+          <p className="flip-card-front"></p>
+          <p 
+          className="tile flip-card-back" 
+          onClick={compareTiles} 
+          key={index} 
+          id={"tile"+index} >
+            {tile}
+          </p>
+        </div>
+      </div>
+
+      )
     });
       return board 
     }
@@ -60,7 +74,7 @@ function Game({level, setLevel, usrname}) {
     // PLAY GAME
     let clicked = [];
     let match;
-    let clickedIds = []
+    let clickedClassNames = []
     
     // let guesses = 0
     // let score = 0
@@ -75,7 +89,7 @@ function Game({level, setLevel, usrname}) {
       allTiles.forEach( (tile) => {
         //tile.style.display = "block";
         tile.classList.remove("guessed");
-        matchedIds = []
+        matchedClassNames = []
 
       } )
       //setScore((points / guesses * 100))
@@ -86,19 +100,19 @@ function Game({level, setLevel, usrname}) {
     // if (e.target.id == "") {
     //   return
     // } 
-    
-    if (clickedIds[0]==e.target.id) {
+    const clickedDiv = e.target.closest(".flip-card").className.replace(" flip-card", "")
+    if (clickedClassNames[0]==clickedDiv) {
       return
     }
 
-    if (matchedIds.includes(e.target.id)) {
+    if (matchedClassNames.includes(clickedDiv)) {
       return
     }
 
     clicked.push(e.target.innerText);
-    clickedIds.push(e.target.id);
+    clickedClassNames.push(clickedDiv);
     //document.getElementById(e.target.id).classList.add("unclickable")
-    console.log(clickedIds)
+    // console.log(clickedClassNames)
     
     if (clicked.length === 2 ) {
       setGuesses(guesses + 1)
@@ -108,15 +122,16 @@ function Game({level, setLevel, usrname}) {
       clicked = []
       
       // If it's a match, hide the cards
-      match && clickedIds.forEach((id) => {
+      console.log(clickedClassNames)
+      match && clickedClassNames.forEach((id) => {
 
         document.getElementById(id).classList.add("guessed");
         //document.getElementById(id).classList.add("unclickable");
-        matchedIds.push(id);
+        matchedClassNames.push(id);
         setPoints(points + 1);
       })
-      clickedIds = []
-      console.log(matchedIds)
+      clickedClassNames = []
+      // console.log(matchedClassNames)
       checkIfShouldGoToNextLevel();
       
     }
