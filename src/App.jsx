@@ -6,25 +6,25 @@ import Win from './Win'
 
 function App() {
   const [level, setLevel] = useState(1);
-  const [name, setName] = useState("");
+  const [name, setName] = useState(localStorage.getItem("username"));
   const [gameOver, setGameOver] = useState(false);
 
 
-  useEffect(
-    () => {
-        console.log(localStorage.getItem("username"));
-        localStorage.getItem("username")? setName(localStorage.getItem("username")): "";
-    }, []
-)
+//   useEffect(
+//     () => {
+//         console.log(localStorage.getItem("username"));
+//         localStorage.getItem("username")? setName(localStorage.getItem("username")): "";
+//     }, []
+// )
 
   return (
     <main>
       <h1>Memory game</h1> 
-      {name === ""? 
+      {!name? 
       <UserName name={name} setName={setName} />
       : !gameOver?
       <Game level={level} setLevel={setLevel} name={name} setGameOver={setGameOver} />
-      :<Win setLevel={setLevel} setGameOver={setGameOver} name={name} /> /*console.log("you win")*/
+      :<Win /*setLevel={setLevel} setGameOver={setGameOver} name={name}*/ /> /*console.log("you win")*/
       }
 
       {/*gameOver === true? console.log("you win"): console.log("this did not work!!!")*/}

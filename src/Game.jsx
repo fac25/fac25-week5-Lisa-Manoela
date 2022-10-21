@@ -68,7 +68,7 @@ function Game({level, setLevel, name, setGameOver}) {
   function checkIfShouldGoToNextLevel() {
     if(levels[`level${level}`] === (points + 1)) {
 
-      if(level === 5) {setGameOver(true)}
+      if(level === 2) {setGameOver(true)}
 
       //unhide all of the tiles, reset the points and guesses to 0 and increase the level
       setPoints(0);
