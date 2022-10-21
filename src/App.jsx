@@ -6,7 +6,7 @@ import Win from './Win'
 
 function App() {
   const [level, setLevel] = useState(1);
-  const [usrname, setName] = useState("");
+  const [name, setName] = useState("");
   const [gameOver, setGameOver] = useState(false);
 
 
@@ -20,11 +20,11 @@ function App() {
   return (
     <main>
       <h1>Memory game</h1> 
-      {usrname === ""? 
-      <UserName usrname={usrname} setName={setName} />
+      {name === ""? 
+      <UserName name={name} setName={setName} />
       : !gameOver?
-      <Game level={level} setLevel={setLevel} usrname={usrname} setGameOver={setGameOver} />
-      :<Win setLevel={setLevel} setGameOver={setGameOver} usrname={usrname} /> /*console.log("you win")*/
+      <Game level={level} setLevel={setLevel} name={name} setGameOver={setGameOver} />
+      :<Win setLevel={setLevel} setGameOver={setGameOver} name={name} /> /*console.log("you win")*/
       }
 
       {/*gameOver === true? console.log("you win"): console.log("this did not work!!!")*/}

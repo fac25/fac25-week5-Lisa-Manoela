@@ -3,7 +3,7 @@ function Win (props) {
     
     
     function playAgain() {
-        localStorage.setItem("username", props.usrname);
+        localStorage.setItem("username", props.name);
         location.reload();
     }
 
