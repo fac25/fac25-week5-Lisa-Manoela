@@ -51,7 +51,7 @@ function Game({level, setLevel, name, setGameOver}) {
 
       const board = levelBoards[level].map(
         (tile, index) => {
-      return (<p className="tile" onClick={compareTiles} key={index} id={"tile"+index} >{tile}</p>)
+      return (<button className="tile" onClick={compareTiles} key={index} id={"tile"+index} >{tile}</button>)
     });
       return board 
     }
