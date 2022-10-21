@@ -107,7 +107,7 @@ function Game({level, setLevel, name, setGameOver}) {
       setGuesses(guesses + 1)
       //setScore((points / guesses * 100))
   
-      match = clicked[0] === clicked[1]? true: false;
+      match = clicked[0] === clicked[1]; //match is true if clicked[0] and clicked[1] are the same
       clicked = []
       
       // If it's a match, hide the cards
@@ -129,18 +129,7 @@ function Game({level, setLevel, name, setGameOver}) {
   const board = createBoard(level)
 
     // [ 2, 0, 3, 1, 0, 4, 4, 1, 3, 2 ]
-function Info({points}) {
 
-  return (
-    <span>
-        <p>Username: {name}</p>
-        <p>Points: <span id="points">{points}</span></p>
-        <p>Guesses: {guesses}</p>
-        <p>Score: {score}</p>
-        <p>Level: {level}</p>
-      </span>
-  )
-}
 
 //  useEffect(() => {
 //     document.getElementById("points").innerText=points;
@@ -148,11 +137,24 @@ function Info({points}) {
 
   return (
     <div>
-      <Info points={points}/>
+      <Info name={name} guesses={guesses} points={points} score={score} level={level} />
         <div className="memoryGame">
           {board}
         </div>
     </div>
+  )
+}
+
+function Info(props) {
+
+  return (
+    <span>
+        <p>Username: {props.name}</p>
+        <p>Points: {props.points}</p>
+        <p>Guesses: {props.guesses}</p>
+        <p>Score: {props.score}</p>
+        <p>Level: {props.level}</p>
+      </span>
   )
 }
 
