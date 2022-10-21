@@ -73,7 +73,8 @@ function Game({ level, setLevel, name, setGameOver }) {
 
   function checkIfShouldGoToNextLevel() {
     if (levels[`level${level}`] === points + 1) {
-      if (level === 2) {
+      const lastLevel = Object.keys(levelBoards).length;
+      if (level === lastLevel) {
         setGameOver(true);
       }
 
