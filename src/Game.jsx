@@ -39,19 +39,20 @@ function createArray(level) {
   return randomisedBoard;
 }
 
-let matchedIds = [];
+// let matchedIds = [];
 
 // COMPONENT
 function Game({ level, setLevel, name, setGameOver }) {
   const [points, setPoints] = useState(0);
   const [guesses, setGuesses] = useState(0);
   const [score, setScore] = useState(0); //(points / guesses * 100)
+  const [matchedIds, setMatchedIds] = useState([])
 
   function createBoard() {
     const board = levelBoards[level].map((tile, index) => {
       return (
         <button
-          className="tile"
+          className={matchedIds.includes("tile" + index)? "tile guessed": "tile"}
           onClick={compareTiles}
           key={index}
           id={"tile" + index}
@@ -86,7 +87,7 @@ function Game({ level, setLevel, name, setGameOver }) {
       allTiles.forEach((tile) => {
         //tile.style.display = "block";
         tile.classList.remove("guessed");
-        matchedIds = [];
+        setMatchedIds([]);
       });
       //setScore((points / guesses * 100))
     }
@@ -121,10 +122,11 @@ function Game({ level, setLevel, name, setGameOver }) {
         clickedIds.forEach((id) => {
           document.getElementById(id).classList.add("guessed");
           //document.getElementById(id).classList.add("unclickable");
-          matchedIds.push(id);
+          setMatchedIds((prev) => [...prev, id])
+          // matchedIds.push(id);
           setPoints(points + 1);
         });
-      clickedIds = [];
+      // clickedIds = [];
       console.log(matchedIds);
       checkIfShouldGoToNextLevel();
     }
